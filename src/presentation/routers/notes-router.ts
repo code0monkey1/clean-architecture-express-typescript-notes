@@ -14,7 +14,37 @@ export default function NotesRouter(
            
          try{
               const notes =await getAllNotesUseCase.execute()
+              res.send(notes)
+         }
+         catch(e){
+            res.status(500).send({ message: "Error fetching data" })
          }
 
      })
+
+        router.post('/',async(req:Request,res:Response)=>{
+           
+         try{
+              const notes =await createNoteUseCase.execute(req.body)
+              res.send(notes)
+         }
+         catch(e){
+            res.status(500).send({ message: "Error fetching data" })
+         }
+
+     })
+
+        router.get('/',async(req:Request,res:Response)=>{
+           
+         try{
+              const notes =await getAllNotesUseCase.execute()
+              res.send(notes)
+         }
+         catch(e){
+            res.status(500).send({ message: "Error fetching data" })
+         }
+
+     })
+
+     return router;
 }
