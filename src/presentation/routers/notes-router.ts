@@ -34,10 +34,11 @@ export default function NotesRouter(
 
      })
 
-        router.get('/',async(req:Request,res:Response)=>{
+    router.patch('/',async(req:Request,res:Response)=>{
            
          try{
-              const notes =await getAllNotesUseCase.execute()
+              const notes =await updateNoteUseCase.execute(req.body.id,req.body)
+              
               res.send(notes)
          }
          catch(e){
