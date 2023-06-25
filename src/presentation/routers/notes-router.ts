@@ -25,7 +25,7 @@ export default function NotesRouter(
         router.post('/',async(req:Request,res:Response)=>{
            
          try{
-              const notes =await createNoteUseCase.execute(req.body)
+              const notes =await createNoteUseCase.execute(req.body.data)
               res.send(notes)
          }
          catch(e){
