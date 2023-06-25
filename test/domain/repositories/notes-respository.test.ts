@@ -17,7 +17,7 @@ describe('Notes Repository', () => {
       getOne(id: string): Promise<NoteResponseModel | null> {
         throw new Error('Method not implemented.');
       }
-      deleteOne(id: string): Promise<NoteRequestModel> {
+      deleteOne(id: string): Promise<NoteResponseModel> {
         throw new Error('Method not implemented.');
       }
       updateOne(id: string, data: Partial<NoteResponseModel>): Promise<NoteResponseModel> {
@@ -90,47 +90,50 @@ describe('Notes Repository', () => {
        it('should create and return a new note',async()=>{
            
             //Arrange
-             const savedNote:NoteResponseModel={
-               content: 'newNote',
-               important: false,
-               id: '1'
+             const id ='1'
+
+             const deletedNote:NoteResponseModel={
+               content: 'my content',
+               id: '1',
+               important: false
              }
 
-             jest.spyOn(mockNotesDataSource,'create').mockImplementation(()=>Promise.resolve(savedNote))
+             jest.spyOn(mockNotesDataSource,'deleteOne').mockImplementation(()=>Promise.resolve(deletedNote))
 
             //Act
             const notesRepository = new NotesRepositoryImpl(mockNotesDataSource)
              
-            const result = await notesRepository.createNote(savedNote)
+            const result :NoteResponseModel= await notesRepository.deleteNote(id)
 
             //Assert
-             expect(result).toStrictEqual(savedNote)
+             expect(result).toStrictEqual(deletedNote)
       
        })
    })
    
-      describe('getNotes', () => {
+      describe('createNote', () => {
            
        it('should get all stored notes',async()=>{ 
            
             //Arrange
-             const storedNotes:NoteResponseModel[]=[{
+             const storedNote:NoteResponseModel={
                content: '',
                important: false,
                id: ''
-             }]
+             }
 
-             jest.spyOn(mockNotesDataSource,'getAll').mockImplementation(()=>Promise.resolve(storedNotes))
+             jest.spyOn(mockNotesDataSource,'create').mockImplementation(()=>Promise.resolve(storedNote))
 
             //Act
             const notesRepository = new NotesRepositoryImpl(mockNotesDataSource)
              
-            const result = await notesRepository.getNotes()
+            const result = await notesRepository.createNote(storedNote)
 
             //Assert
-             expect(result).toStrictEqual(storedNotes)
+             expect(result).toStrictEqual(storedNote)
+             expect(mockNotesDataSource.create).toBeCalledTimes(1)
+             expect(mockNotesDataSource.create).toBeCalledWith(storedNote)
 
-            
        })
    })
    

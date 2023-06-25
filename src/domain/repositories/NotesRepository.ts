@@ -16,9 +16,14 @@ export default class NotesRepositoryImpl implements NotesRepository{
     const createdNote = await this.notesDataSource.create(note)
     return createdNote;
   }
-  deleteNote(id: string): Promise<NoteResponseModel> {
-    throw new Error('Method not implemented.');
+  
+  async deleteNote(id: string): Promise<NoteResponseModel> {
+    
+    const deletedNote = await this.notesDataSource.deleteOne(id)
+
+    return deletedNote;
   }
+  
   async updateNote(id: string, note: Partial<NoteRequestModel>): Promise<NoteResponseModel> {
 
     const updatedNote = await this.notesDataSource.updateOne(id,note)

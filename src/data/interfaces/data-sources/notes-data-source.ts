@@ -7,7 +7,7 @@ export interface NotesDataSource{
 
       getOne(id:string):Promise<NoteResponseModel|null>
 
-      deleteOne(id:string):Promise<NoteRequestModel>
+      deleteOne(id:string):Promise<NoteResponseModel>
 
       updateOne(id:string,data:Partial<NoteResponseModel>):Promise<NoteResponseModel>
 
