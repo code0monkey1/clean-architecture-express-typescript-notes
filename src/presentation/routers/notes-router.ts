@@ -37,7 +37,7 @@ export default function NotesRouter(
     router.patch('/',async(req:Request,res:Response)=>{
            
          try{
-              const notes =await updateNoteUseCase.execute(req.body.id,req.body)
+              const notes =await updateNoteUseCase.execute(req.body.id,req.body.data)
               
               res.send(notes)
          }
