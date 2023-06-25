@@ -1,7 +1,5 @@
-import { NoteRequestModel, NoteResponseModel } from '../../../src/domain/entities/index';
-
-import { mock } from 'node:test';
 import { NotesDataSource } from '../../../src/data/interfaces/data-sources/notes-data-source';
+import { NoteRequestModel, NoteResponseModel } from '../../../src/domain/entities/index';
 import NotesRepositoryImpl from '../../../src/domain/repositories/NotesRepository';
 
 
