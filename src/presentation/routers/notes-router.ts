@@ -17,7 +17,7 @@ export default function NotesRouter(
               res.send(notes)
          }
          catch(e){
-            res.status(500).send({ message: "Error fetching data" })
+             res.status(500).send({ message: "Error fetching data" })
          }
 
      })

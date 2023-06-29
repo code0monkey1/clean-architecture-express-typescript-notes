@@ -74,9 +74,9 @@ describe('Notes Router', () => {
 
              const response = await request(server).get("/notes")
 
-             expect(response.status).toBe(500)
+            //  expect(response.status).toBe(500)
             
-            // expect(response.body).toStrictEqual({ message: "Error fetching data" })
+            expect(response.body).toStrictEqual({ message: "Error fetching data" })
           
        
             
