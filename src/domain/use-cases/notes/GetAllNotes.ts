@@ -12,7 +12,7 @@ class GetAllNotes implements GetAllNotesUseCase{
 
   async execute(): Promise<NoteResponseModel[]> {
 
-     const notes =await  this.notesRepository.getNotes()
+     const notes = await  this.notesRepository.getNotes()
       
      return notes;
   }
