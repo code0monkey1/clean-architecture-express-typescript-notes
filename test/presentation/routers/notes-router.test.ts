@@ -133,9 +133,7 @@ describe('Notes Router', () => {
 
              //Act
                
-                
                 const response = await request(server).post("/notes")
-
 
              //Assert
 
@@ -151,7 +149,7 @@ describe('Notes Router', () => {
 
         describe('PATCH / notes', () => {
 
-               it('should return 204 , with the modified note',async()=>{
+               it('should return 200 , with the modified note',async()=>{
 
                 //Arrange
 
@@ -197,7 +195,6 @@ describe('Notes Router', () => {
               expect(response.status).toBe(500)
 
               expect(response.body).toStrictEqual({ message: "Error fetching data" })
-
 
                })
           
