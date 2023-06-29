@@ -1,10 +1,11 @@
-import { NoteRequestModel, NoteResponseModel } from "../../../src/domain/entities";
+import { NoteRequestModel } from "../../../src/domain/entities";
 import { CreateNoteUseCase } from "../../../src/domain/interfaces/use-cases/create-note-use-case";
 import { GetAllNotesUseCase } from '../../../src/domain/interfaces/use-cases/get-all-notes-use-case';
 import { UpdateNoteUseCase } from '../../../src/domain/interfaces/use-cases/update-note-use-case';
 import NotesRouter from '../../../src/presentation/routers/notes-router';
 
 import request from "supertest";
+import { NoteResponseModel } from '../../../src/domain/entities/index';
 import server from '../../../src/server';
 describe('Notes Router', () => {
      
@@ -89,5 +90,34 @@ describe('Notes Router', () => {
         
        
      })
+
+     describe('POST / notes',()=>{
+
+         test('should return 200 with data',async()=>{
+
+              //Arrange
+
+                const noteResponse : NoteResponseModel ={
+                  content: "",
+                  important: false,
+                  id:'12'
+                }
+
+                jest.spyOn(mockCreateNoteUseCase,'execute').mockImplementation(()=>Promise.resolve(noteResponse))
+
+             //Act
+               
+                
+                const note = await request(server).post("/notes")
+
+
+             //Assert
+
+             expect(note.body).toStrictEqual(noteResponse)
+
+         }
+         )
+
+        })
      
 })
