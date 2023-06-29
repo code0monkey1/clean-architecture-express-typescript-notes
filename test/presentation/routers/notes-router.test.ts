@@ -2,6 +2,8 @@ import { NoteRequestModel, NoteResponseModel } from "../../../src/domain/entitie
 import { CreateNoteUseCase } from "../../../src/domain/interfaces/use-cases/create-note-use-case";
 import { GetAllNotesUseCase } from '../../../src/domain/interfaces/use-cases/get-all-notes-use-case';
 import { UpdateNoteUseCase } from '../../../src/domain/interfaces/use-cases/update-note-use-case';
+import NotesRouter from '../../../src/presentation/routers/notes-router';
+import server from '../../../src/server';
 
 describe('Notes Router', () => {
      
@@ -34,6 +36,8 @@ describe('Notes Router', () => {
       mockCreateNoteUseCase= new MockCreateNoteUseCase()
       mockGetAllNotesUseCase= new MockGetAllNotesUseCase()
       mockUpdateNoteUseCase = new MockUpdateNoteUseCase()
+      
+      server.use('/notes',NotesRouter(mockGetAllNotesUseCase,mockCreateNoteUseCase,mockUpdateNoteUseCase))
 
      } )
     
