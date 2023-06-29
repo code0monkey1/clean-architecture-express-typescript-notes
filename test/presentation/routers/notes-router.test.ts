@@ -38,7 +38,7 @@ describe('Notes Router', () => {
       mockGetAllNotesUseCase= new MockGetAllNotesUseCase()
       mockUpdateNoteUseCase = new MockUpdateNoteUseCase()
       
-      server.use('/note',NotesRouter(mockGetAllNotesUseCase,mockCreateNoteUseCase,mockUpdateNoteUseCase))
+      server.use('/notes',NotesRouter(mockGetAllNotesUseCase,mockCreateNoteUseCase,mockUpdateNoteUseCase))
 
      } )
     
@@ -46,7 +46,7 @@ describe('Notes Router', () => {
    let mockGetAllNotesUseCase:GetAllNotesUseCase
    let mockUpdateNoteUseCase :UpdateNoteUseCase
      
-     describe('GET / note', () => {
+     describe('GET / notes', () => {
       
         test('should return 200 with data',async()=>{
 
@@ -55,12 +55,16 @@ describe('Notes Router', () => {
                important: false,
                id: "1"
              }
-           
-             jest.spyOn(mockGetAllNotesUseCase,'execute').mockImplementation(()=> Promise.resolve([response]))
 
-            const result = await request(server).get('/note')
+             const expected=[response]
+           
+             jest.spyOn(mockGetAllNotesUseCase,'execute').mockImplementation(()=> Promise.resolve(expected))
+
+            const result = await request(server).get('/notes')
                
             expect(result.status).toBe(200)
+
+            expect(result.body).toStrictEqual(expected)
         })
         
        
