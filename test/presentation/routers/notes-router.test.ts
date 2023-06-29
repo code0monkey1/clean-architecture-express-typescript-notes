@@ -115,7 +115,34 @@ describe('Notes Router', () => {
 
              expect(note.body).toStrictEqual(noteResponse)
 
-         }
+          }
+         )
+
+
+         test('should return 500 , when error ,with Error fetching data',async()=>{
+
+              //Arrange
+
+                const noteResponse : NoteResponseModel ={
+                  content: "",
+                  important: false,
+                  id:'12'
+                }
+
+                jest.spyOn(mockCreateNoteUseCase,'execute').mockImplementation(()=>Promise.resolve(noteResponse))
+
+             //Act
+               
+                
+                const note = await request(server).post("/notes")
+
+
+             //Assert
+
+             expect(note.body).toStrictEqual(noteResponse)
+             expect(note.status).toBe(200)
+
+          }
          )
 
         })
