@@ -9,9 +9,10 @@ class CreateNote implements CreateNoteUseCase{
   constructor(notesRepository:NotesRepository){
     this.notesRepository=notesRepository
   }
-  execute(note: NoteRequestModel): Promise<NoteResponseModel> {
+  
+  async execute(note: NoteRequestModel): Promise<NoteResponseModel> {
     
-     const createdNote= this.notesRepository.createNote(note)
+     const createdNote=await this.notesRepository.createNote(note)
 
      return createdNote
   }
