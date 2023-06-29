@@ -123,12 +123,6 @@ describe('Notes Router', () => {
 
               //Arrange
 
-                const noteResponse : NoteResponseModel ={
-                  content: "",
-                  important: false,
-                  id:'12'
-                }
-
                 jest.spyOn(mockCreateNoteUseCase,'execute').mockImplementation(()=>Promise.reject(Error()))
 
              //Act
