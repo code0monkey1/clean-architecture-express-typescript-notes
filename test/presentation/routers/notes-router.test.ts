@@ -175,6 +175,31 @@ describe('Notes Router', () => {
 
 
                })
+
+                it('should return 500 , when there is an Error, with message ,"Error fetching data" ',async()=>{
+
+                //Arrange
+
+                const noteResponse : NoteResponseModel ={
+                  content: "",
+                  important: false,
+                  id:'12'
+                }
+
+                jest.spyOn(mockUpdateNoteUseCase,'execute').mockImplementation(()=>Promise.reject(Error()))
+
+             //Act
+                
+                const response = await request(server).patch("/notes").send(noteResponse)
+
+             //Assert
+
+              expect(response.status).toBe(500)
+
+              expect(response.body).toStrictEqual({ message: "Error fetching data" })
+
+
+               })
           
         })
         
