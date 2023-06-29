@@ -165,13 +165,13 @@ describe('Notes Router', () => {
 
              //Act
                 
-                const response = await request(server).patch("/notes")
+                const response = await request(server).patch("/notes").send(noteResponse)
 
              //Assert
 
-             expect(response.status).toBe(204)
+              expect(response.status).toBe(200)
 
-             expect(response.body).toStrictEqual([noteResponse])
+              expect(response.body).toStrictEqual(noteResponse)
 
 
                })
