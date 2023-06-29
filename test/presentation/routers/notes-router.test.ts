@@ -129,7 +129,7 @@ describe('Notes Router', () => {
                   id:'12'
                 }
 
-                jest.spyOn(mockCreateNoteUseCase,'execute').mockImplementation(()=>Promise.resolve(noteResponse))
+                jest.spyOn(mockCreateNoteUseCase,'execute').mockImplementation(()=>Promise.reject(Error()))
 
              //Act
                
@@ -139,8 +139,9 @@ describe('Notes Router', () => {
 
              //Assert
 
-             expect(note.body).toStrictEqual(noteResponse)
-             expect(note.status).toBe(200)
+             expect(note.status).toBe(500)
+
+             expect(note.body).toStrictEqual({message:"Error fetching data"})
 
           }
          )
