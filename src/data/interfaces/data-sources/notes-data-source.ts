@@ -1,6 +1,7 @@
 import { NoteRequestModel, NoteResponseModel } from "../../../domain/entities";
 
 export interface NotesDataSource{
+      
       create(note:NoteRequestModel):Promise<NoteResponseModel>
       
       getAll():Promise<NoteResponseModel[]>

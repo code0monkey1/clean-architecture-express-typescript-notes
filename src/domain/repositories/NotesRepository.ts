@@ -13,7 +13,9 @@ export default class NotesRepositoryImpl implements NotesRepository{
   }
   
   async createNote(note: NoteRequestModel): Promise<NoteResponseModel> {
+    
     const createdNote = await this.notesDataSource.create(note)
+    
     return createdNote;
   }
   
