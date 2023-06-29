@@ -30,9 +30,7 @@ describe('Notes Router', () => {
       
      }
 
-     beforeEach(()=>{
-
-      jest.clearAllMocks()
+     beforeAll(()=>{
       
       mockCreateNoteUseCase= new MockCreateNoteUseCase()
       mockGetAllNotesUseCase= new MockGetAllNotesUseCase()
@@ -45,6 +43,13 @@ describe('Notes Router', () => {
    let mockCreateNoteUseCase:CreateNoteUseCase
    let mockGetAllNotesUseCase:GetAllNotesUseCase
    let mockUpdateNoteUseCase :UpdateNoteUseCase
+
+ 
+   beforeEach(()=>{
+     
+    jest.clearAllMocks()
+
+   })
      
      describe('GET / notes', () => {
       
