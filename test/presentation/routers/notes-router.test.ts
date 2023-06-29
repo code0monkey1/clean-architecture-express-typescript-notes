@@ -3,8 +3,9 @@ import { CreateNoteUseCase } from "../../../src/domain/interfaces/use-cases/crea
 import { GetAllNotesUseCase } from '../../../src/domain/interfaces/use-cases/get-all-notes-use-case';
 import { UpdateNoteUseCase } from '../../../src/domain/interfaces/use-cases/update-note-use-case';
 import NotesRouter from '../../../src/presentation/routers/notes-router';
-import server from '../../../src/server';
 
+import request from "supertest";
+import server from '../../../src/server';
 describe('Notes Router', () => {
      
      class MockCreateNoteUseCase implements CreateNoteUseCase{
@@ -48,8 +49,17 @@ describe('Notes Router', () => {
      describe('GET / note', () => {
       
         test('should return 200 with data',async()=>{
+
+             const response:NoteResponseModel={
+               content: "hello",
+               important: false,
+               id: "1"
+             }
            
-              const notes:NoteResponseModel[] = await mockGetAllNotesUseCase.execute()
+             jest.spyOn(mockGetAllNotesUseCase,'execute').mockImplementation(await()=>{
+
+                return Promise.resolve(response)
+             } )
 
               
                
