@@ -70,25 +70,14 @@ describe('Notes Router', () => {
         test('should return status 500 , error fetching data ,in case of error',async()=>{
 
 
-           
-             jest.spyOn(mockGetAllNotesUseCase,'execute').mockImplementation(()=> Promise.reject(Error()))
+             jest.spyOn(mockGetAllNotesUseCase, "execute").mockImplementation(() => Promise.reject(Error())
+             )
+            const response = await request(server).get("/notes")
 
-
-               const result = await request(server).get('/notes')
-
-               expect(result.status).toBe(500)
-
+            expect(response.status).toBe(500)
+            // expect(response.body).toStrictEqual({ message: "Error fetching data" })
           
-            //  catch(err:unknown){
-
-            //     let errorMessage='Error : '
-
-            //      if(err instanceof Error){
-            //        errorMessage+=err.message
-            //      }
-            //     expect(errorMessage).toBe('Error : Error fetching dat')
-            //  }
-               
+       
             
         })
         
