@@ -26,7 +26,7 @@ export default function NotesRouter(
            
          try{
               const notes =await createNoteUseCase.execute(req.body.data)
-              res.send(notes)
+              res.status(201).send(notes)
          }
          catch(e){
             res.status(500).send({ message: "Error fetching data" })
@@ -39,7 +39,7 @@ export default function NotesRouter(
          try{
               const notes =await updateNoteUseCase.execute(req.body.id,req.body.data)
               
-              res.send(notes)
+              res.status(204).send(notes)
          }
          catch(e){
             res.status(500).send({ message: "Error fetching data" })
