@@ -108,12 +108,12 @@ describe('Notes Router', () => {
              //Act
                
                 
-                const note = await request(server).post("/notes")
+                const response = await request(server).post("/notes")
 
 
              //Assert
-
-             expect(note.body).toStrictEqual(noteResponse)
+             expect(response.status).toBe(201)
+             expect(response.body).toStrictEqual(noteResponse)
 
           }
          )
@@ -134,14 +134,14 @@ describe('Notes Router', () => {
              //Act
                
                 
-                const note = await request(server).post("/notes")
+                const response = await request(server).post("/notes")
 
 
              //Assert
 
-             expect(note.status).toBe(500)
+             expect(response.status).toBe(500)
 
-             expect(note.body).toStrictEqual({message:"Error fetching data"})
+             expect(response.body).toStrictEqual({message:"Error fetching data"})
 
           }
          )
@@ -149,10 +149,29 @@ describe('Notes Router', () => {
         })
 
 
-        describe('PUT / notes', () => {
+        describe('PATCH / notes', () => {
 
-               it('should return 204 , with the modified note',()=>{
+               it('should return 204 , with the modified note',async()=>{
 
+                       //Arrange
+
+                const noteResponse : NoteResponseModel ={
+                  content: "",
+                  important: false,
+                  id:'12'
+                }
+
+                jest.spyOn(mockUpdateNoteUseCase,'execute').mockImplementation(()=>Promise.resolve(noteResponse))
+
+             //Act
+                
+                const response = await request(server).patch("/notes")
+
+             //Assert
+
+             expect(response.status).toBe(204)
+
+             expect(response.body).toStrictEqual([noteResponse])
 
 
                })
